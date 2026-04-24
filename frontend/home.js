@@ -53,7 +53,7 @@ function initHome(user) {
   if (createCard) {
     createCard.onclick = () => {
       clearHouseholdCache();
-      window.location.href = 'creategroup.html';
+      window.location.href = 'createGroup.html';
     };
   }
 
