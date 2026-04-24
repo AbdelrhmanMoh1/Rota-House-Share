@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RotaShare - Home</title>
+    <!-- CSS (Assuming you have home.css) -->
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="toast.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- MUST ADD THIS FOR ICONS TO WORK -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <div class="logo-box">
+                <i data-lucide="home" stroke-width="2.5"></i>
+            </div>
+            <h1 class="app-name">Rota <span>House Sharing</span></h1>
+        </div>
+
+        <div class="header-right">
+            <button class="icon-btn">
+                <i data-lucide="bell" stroke-width="2"></i>
+                <span class="notif-dot"></span>
+            </button>
+            
+            <div class="user-menu">
+                <!-- Added ID for initials -->
+                <div class="avatar" id="userAvatarDisplay">JD</div>
+                <div class="dropdown">
+                    <a href="profile.html" class="dropdown-item">
+                        <i data-lucide="user-circle"></i> My Profile
+                    </a>
+                    <button class="dropdown-item">
+                        <i data-lucide="settings"></i> Settings
+                    </button>
+                    <!-- Added logout call -->
+                    <button class="dropdown-item danger" onclick="logout()">
+                        <i data-lucide="log-out"></i> Sign Out
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="hero">
+            <!-- Added ID for welcome message -->
+            <h2 id="welcomeUser">Welcome back!</h2>
+            <p>Manage your household tasks, expenses, and schedules in one place.</p>
+        </div>
+
+        <div class="card-grid">
+            <!-- Create Card -->
+            <div class="card primary" onclick="window.location.href='creategroup.html'">
+                <i data-lucide="plus" class="watermark"></i>
+                <div class="card-content">
+                    <div class="card-icon-wrap">
+                        <i data-lucide="plus" stroke-width="3"></i>
+                    </div>
+                    <h3>Create a Group</h3>
+                    <p>Start a new household. Invite your roommates to coordinate chores and bills.</p>
+                    <div class="card-link">Get Started <i data-lucide="chevron-right"></i></div>
+                </div>
+            </div>
+
+            <!-- Join Card -->
+            <div class="card success">
+                <i data-lucide="users" class="watermark"></i>
+                <div class="card-content">
+                    <div class="card-icon-wrap">
+                        <i data-lucide="users-round" stroke-width="2.5"></i>
+                    </div>
+                    <h3>Join a Group</h3>
+                    <p>Already have a house set up? Enter an invitation code to join your roommates.</p>
+                    <div class="card-link">Join House <i data-lucide="chevron-right"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <section class="info-banner">
+            <div class="info-text-wrap">
+                <h4>Better living, together.</h4>
+                <p>Did you know? Groups using Rota reduce household conflicts by over 40% through clear communication.</p>
+            </div>
+            <button class="info-btn">Learn How it Works</button>
+        </section>
+    </main>
+
+    <!-- Unified JS -->
+    <script src="api.js"></script>
+<script src="toast.js"></script>
+<script src="home.js"></script>
+</body>
+</html>

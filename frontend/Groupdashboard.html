@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rota | House Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="groupDashboard.css">
+    <link rel="stylesheet" href="toast.css">
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="logo-sq">R</div>
+        <div class="nav-links">
+            <a href="Groupdashboard.html" class="nav-item active" title="Dashboard"><i data-lucide="layout-dashboard"></i></a>
+            <a href="leaderboard.html" class="nav-item" title="Leaderboard"><i data-lucide="trophy"></i></a>
+            <a href="profile.html" class="nav-item" title="Account"><i data-lucide="user"></i></a>
+        </div>
+        <button onclick="clearSession()" class="logout-btn" title="Logout"><i data-lucide="log-out"></i></button>
+    </nav>
+
+    <div class="app-wrapper">
+        <main class="content">
+            <header class="group-header">
+                <div class="header-left">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <h1 id="groupNameDisplay">Loading Household...</h1>
+                        <span class="group-id-tag" id="groupIdDisplay" title="Share this code with housemates">#----</span>
+                    </div>
+                    <p id="groupDescDisplay">Fetching your household details...</p>
+                </div>
+                <div class="header-right">
+                    <button class="leave-group-btn" onclick="handleLeaveGroup()">
+                        <i data-lucide="log-out"></i> Leave Group
+                    </button>
+                </div>
+            </header>
+
+            <div class="dashboard-layout">
+                <section class="chores-panel">
+                    <div class="section-header">
+                        <h2>Chores Management</h2>
+                        <div class="chore-tabs">
+                            <button class="c-tab active" onclick="switchChoreTab('todo')">To Do</button>
+                            <button class="c-tab" onclick="switchChoreTab('done')">Done</button>
+                        </div>
+                    </div>
+                    <div class="chore-list" id="choreList"></div>
+                    <button class="add-btn" onclick="openModal()">
+                        <i data-lucide="plus"></i> Add New Chore
+                    </button>
+
+                    <!-- Bug #4: Shared purchases / contribution panel -->
+                    <div class="section-header" style="margin-top:30px;">
+                        <h2>Shared Purchases</h2>
+                        <button class="add-btn" style="width:auto;padding:6px 14px;font-size:0.85rem;" onclick="openPurchaseModal()">
+                            <i data-lucide="plus"></i> New
+                        </button>
+                    </div>
+                    <div class="purchase-list" id="purchaseList"></div>
+                </section>
+
+                <aside class="side-panel">
+                    <div class="card members-card">
+                        <h3>Housemates</h3>
+                        <div class="member-list" id="memberList"></div>
+                    </div>
+
+                    <div class="card shopping-card">
+                        <div class="section-header" style="margin-bottom: 15px;">
+                            <h3>Shared Shopping List</h3>
+                            <div class="chore-tabs" style="scale: 0.85; transform-origin: right;">
+                                <button class="s-tab active" onclick="switchShopTab('tobuy')">To Buy</button>
+                                <button class="s-tab" onclick="switchShopTab('purchased')">Purchased</button>
+                            </div>
+                        </div>
+                        <div class="shopping-items" id="shoppingList"></div>
+                        <div class="add-shopping-form">
+                            <input type="text" id="shopInput" placeholder="Add milk, soap...">
+                            <button onclick="addShoppingItem()"><i data-lucide="plus"></i></button>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add chore modal -->
+    <div id="choreModal" class="modal">
+        <div class="modal-content">
+            <h3>Add a Task</h3>
+            <input type="text" id="newChoreTitle" placeholder="What needs doing?">
+            <select id="choreAssignee">
+                <option value="">Assign to...</option>
+            </select>
+            <div class="modal-actions">
+                <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+                <button class="confirm-btn" onclick="confirmAddChore()">Add Task</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bug #2: Kick member modal -->
+    <div id="kickModal" class="modal">
+        <div class="modal-content">
+            <h3>Remove Housemate</h3>
+            <p id="kickModalTarget" style="color:#64748b;font-size:0.9rem;margin-bottom:12px;"></p>
+            <label style="font-size:0.85rem;font-weight:600;color:#64748b;display:block;margin-bottom:6px;">Reason (required)</label>
+            <textarea id="kickReason" rows="3" maxlength="500"
+                      style="width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:10px;font-family:inherit;resize:vertical;"
+                      placeholder="Explain why this person is being removed..."></textarea>
+            <div class="modal-actions">
+                <button class="cancel-btn" onclick="closeKickModal()">Cancel</button>
+                <button class="confirm-btn" style="background:#dc2626;" onclick="confirmKick()">Remove Member</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bug #4: Create purchase modal -->
+    <div id="purchaseModal" class="modal">
+        <div class="modal-content">
+            <h3>Start a Group Purchase</h3>
+            <input type="text" id="purchaseItemName" placeholder="Item name (e.g. new kettle)" maxlength="200">
+            <input type="text" id="purchaseDesc" placeholder="Description (optional)" maxlength="300" style="margin-top:10px;">
+            <input type="number" id="purchaseTarget" placeholder="Target amount (£)" min="0.01" step="0.01" style="margin-top:10px;">
+            <div class="modal-actions">
+                <button class="cancel-btn" onclick="closePurchaseModal()">Cancel</button>
+                <button class="confirm-btn" onclick="confirmCreatePurchase()">Create</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bug #4: Contribute to purchase modal -->
+    <div id="contributeModal" class="modal">
+        <div class="modal-content">
+            <h3 id="contributeTitle">Contribute</h3>
+            <p id="contributeInfo" style="color:#64748b;font-size:0.9rem;margin-bottom:12px;"></p>
+            <input type="number" id="contributeAmount" placeholder="Amount (£)" min="0.01" step="0.01">
+            <div class="modal-actions">
+                <button class="cancel-btn" onclick="closeContributeModal()">Cancel</button>
+                <button class="confirm-btn" onclick="confirmContribute()">Contribute</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="api.js"></script>
+    <script src="toast.js"></script>
+    <script src="groupDashboard.js"></script>
+</body>
+</html>

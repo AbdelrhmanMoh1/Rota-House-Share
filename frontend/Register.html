@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rota | Welcome</title>
+    <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="toast.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div class="auth-card">
+        <div class="brand">
+            <div class="logo-sq">R</div>
+            <span>Rota</span>
+        </div>
+
+        <div class="auth-tabs">
+            <button class="tab-btn active" onclick="switchAuth('login')">Login</button>
+            <button class="tab-btn" onclick="switchAuth('signup')">Sign Up</button>
+        </div>
+
+        <!-- Login Form -->
+        <div id="loginForm" class="form-container active">
+            <form onsubmit="handleAuth(event, 'login')">
+                <div class="field">
+                    <label>Email Address</label>
+                    <div class="input-wrapper">
+                        <i data-lucide="mail"></i>
+                        <input type="email" placeholder="up1234567@myport.ac.uk" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Password</label>
+                    <div class="input-wrapper">
+                        <i data-lucide="lock"></i>
+                        <input type="password" class="password-field" placeholder="••••••••" required>
+                        <i data-lucide="eye" class="toggle-pass" onclick="togglePassword(this)"></i>
+                    </div>
+                </div>
+                <a href="#" class="forgot-pass">Forgot password?</a>
+                <button type="submit" class="submit-btn">
+                    Sign In <i data-lucide="arrow-right"></i>
+                </button>
+            </form>
+        </div>
+
+        <!-- Signup Form -->
+        <div id="signupForm" class="form-container">
+            <form onsubmit="handleAuth(event, 'signup')">
+                <div class="field">
+                    <label>Full Name</label>
+                    <div class="input-wrapper">
+                        <i data-lucide="user"></i>
+                        <input type="text" placeholder="Full Name" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Email Address</label>
+                    <div class="input-wrapper">
+                        <i data-lucide="mail"></i>
+                        <input type="email" placeholder="up1234567@myport.ac.uk" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Password</label>
+                    <div class="input-wrapper">
+                        <i data-lucide="lock"></i>
+                        <input type="password" class="password-field" placeholder="Create a password" required>
+                        <i data-lucide="eye" class="toggle-pass" onclick="togglePassword(this)"></i>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">
+                    Create Account <i data-lucide="sparkles"></i>
+                </button>
+            </form>
+        </div>
+
+        <div class="divider">OR CONTINUE WITH</div>
+
+        <div class="social-btns">
+            <button class="social-btn">
+                <i data-lucide="chrome" style="width: 18px;"></i> Google
+            </button>
+            <button class="social-btn">
+                <i data-lucide="apple" style="width: 18px;"></i> Apple
+            </button>
+        </div>
+    </div>
+
+<script src="api.js"></script>
+<script src="toast.js"></script>
+<script src="register.js"></script>
+</body>
+</html>
+
+
+

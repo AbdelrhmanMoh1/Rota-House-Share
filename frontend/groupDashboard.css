@@ -1,0 +1,540 @@
+/**
+ * Rota House Dashboard - Corrected Full CSS
+ */
+
+:root {
+    --primary: #6366f1;
+    --primary-light: #818cf8;
+    --bg: #f8fafc;
+    --white: #ffffff;
+    --text-main: #0f172a;
+    --text-sub: #64748b;
+    --border: #e2e8f0;
+    --danger: #ef4444;
+}
+
+/* =========================================
+   Base Styles
+   ========================================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-main);
+    line-height: 1.2;
+}
+
+.app-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* =========================================
+   Sidebar Navigation
+   ========================================= */
+.sidebar {
+    width: 80px;
+    background: var(--white);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 0;
+    position: fixed;
+    height: 100vh;
+    z-index: 100;
+}
+
+.logo-sq {
+    background: var(--primary);
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: 800;
+    margin-bottom: 50px;
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    flex: 1;
+}
+
+.nav-item {
+    color: var(--text-sub);
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+}
+
+.nav-item.active, .nav-item:hover {
+    color: var(--primary);
+    background: #ede9fe;
+}
+
+.logout-btn {
+    border: none;
+    background: none;
+    color: var(--danger);
+    cursor: pointer;
+}
+
+/* =========================================
+   Main Content Layout
+   ========================================= */
+.content {
+    margin-left: 80px;
+    flex: 1;
+    padding: 40px;
+    max-width: 1400px;
+    margin-right: auto;
+}
+
+.group-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+}
+
+.group-header h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.group-id-tag {
+    font-size: 0.85rem;
+    background: #ede9fe;
+    color: var(--primary);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: 700;
+    cursor: default;
+}
+
+.group-header p {
+    color: var(--text-sub);
+    max-width: 600px;
+    margin-top: 5px;
+    line-height: 1.5;
+}
+
+.leave-group-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #fee2e2;
+    color: var(--danger);
+    border: none;
+    padding: 10px 18px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.leave-group-btn:hover {
+    background: #fecaca;
+}
+
+.dashboard-layout {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 30px;
+}
+
+/* =========================================
+   Panels & Cards
+   ========================================= */
+.chores-panel, .card {
+    background: var(--white);
+    border-radius: 24px;
+    border: 1px solid var(--border);
+}
+
+.chores-panel { padding: 30px; }
+.card { padding: 25px; }
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+/* =========================================
+   Shared Tabs (Chores & Shopping)
+   ========================================= */
+.chore-tabs, .shop-tabs {
+    display: flex;
+    background: #f1f5f9;
+    padding: 4px;
+    border-radius: 12px;
+}
+
+.c-tab, .s-tab {
+    border: none;
+    background: transparent;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--text-sub);
+    font-size: 0.85rem;
+    transition: 0.2s;
+}
+
+.c-tab.active, .s-tab.active {
+    background: var(--white);
+    color: var(--primary);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* =========================================
+   List Elements (Chores & Shopping Items)
+   ========================================= */
+.chore-list, .shopping-items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.chore-item, .shop-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    background: var(--bg);
+    border-radius: 16px;
+    border: 1px solid transparent;
+    transition: 0.2s;
+}
+
+.shop-item {
+    justify-content: space-between;
+}
+
+.chore-item:hover, .shop-item:hover {
+    border-color: var(--primary-light);
+}
+
+.chore-item.done, .shop-item.purchased { opacity: 0.6; }
+.chore-item.done .chore-title, .shop-item.purchased label { text-decoration: line-through; }
+
+/* =========================================
+   Checkboxes
+   BUG 1 FIX: pointer-events and cursor must be set on the check div
+   so clicking anywhere on the check box triggers toggleChore.
+   ========================================= */
+.chore-check, .shop-check {
+    width: 24px;
+    height: 24px;
+    min-width: 24px; /* prevent shrink */
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    transition: 0.2s;
+    /* BUG 1 FIX: ensure the element is always clickable */
+    pointer-events: all;
+    user-select: none;
+}
+
+.chore-check.checked, .shop-check.checked {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+/* =========================================
+   BUG 1 FIX: chore-info must be flex-direction:column
+   Previously it was display:flex with align-items:center (row direction),
+   which put chore-title and chore-meta side by side, making the row
+   unreadable and obscuring the check div's click target.
+   ========================================= */
+.chore-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;  /* FIX: stack title above meta */
+    gap: 4px;
+}
+
+.shop-item-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.chore-title, .shop-item label {
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+/* BUG 1 FIX: chore-meta must be display:block so it sits below the title */
+.chore-meta {
+    font-size: 0.8rem;
+    color: var(--text-sub);
+    display: block;
+}
+
+/* =========================================
+   Buttons & Inputs
+   ========================================= */
+.add-btn {
+    width: 100%;
+    padding: 15px;
+    border: 2px dashed var(--border);
+    border-radius: 16px;
+    background: transparent;
+    color: var(--text-sub);
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.add-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+.delete-btn {
+    background: transparent;
+    border: none;
+    color: var(--danger);
+    cursor: pointer;
+    opacity: 0.5;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.delete-btn:hover { opacity: 1; }
+
+.add-shopping-form {
+    display: flex;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.add-shopping-form input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    outline: none;
+    background: var(--white);
+    color: var(--text-main);
+}
+
+.add-shopping-form button {
+    background: var(--text-main);
+    color: white;
+    border: none;
+    padding: 0 15px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+/* =========================================
+   Sidebar Member List
+   ========================================= */
+.member-list { display: flex; flex-direction: column; gap: 12px; }
+.member { display: flex; align-items: center; gap: 12px; }
+.m-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    min-width: 32px;
+}
+
+/* =========================================
+   Modals
+   ========================================= */
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 200; align-items: center; justify-content: center; }
+.modal-content { background: white; padding: 30px; border-radius: 24px; width: 100%; max-width: 400px; }
+.modal-content input, .modal-content select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid var(--border); border-radius: 10px; }
+.modal-actions { display: flex; gap: 10px; margin-top: 20px; }
+.modal-actions button { flex: 1; padding: 12px; border-radius: 10px; border: none; font-weight: 700; cursor: pointer; }
+.confirm-btn { background: var(--primary); color: white; }
+.cancel-btn { background: var(--bg); }
+
+/* =========================================
+   Responsive
+   ========================================= */
+@media (max-width: 1000px) {
+    .dashboard-layout { grid-template-columns: 1fr; }
+    .content { padding: 20px; }
+}
+
+/* =========================================
+   DARK MODE
+   BUG 5 FIX: Complete dark mode rules for this page
+   ========================================= */
+body.dark-mode {
+    --bg: #0f172a;
+    --white: #1e293b;
+    --text-main: #f8fafc;
+    --text-sub: #94a3b8;
+    --border: #334155;
+    --primary-light: #4f46e5;
+}
+
+body.dark-mode .modal-content {
+    background: #1e293b;
+    color: #f8fafc;
+}
+
+body.dark-mode .modal-content input,
+body.dark-mode .modal-content select {
+    background: #0f172a;
+    color: #f8fafc;
+    border-color: #334155;
+}
+
+body.dark-mode .chore-check,
+body.dark-mode .shop-check {
+    background: #0f172a;
+    border-color: #334155;
+}
+
+body.dark-mode .add-shopping-form input {
+    background: #0f172a;
+    color: #f8fafc;
+    border-color: #334155;
+}
+
+body.dark-mode .cancel-btn {
+    background: #0f172a;
+    color: #f8fafc;
+}
+
+body { transition: background-color 0.3s ease, color 0.3s ease; }
+.sidebar, .chores-panel, .card { transition: background-color 0.3s ease, border-color 0.3s ease; }
+
+/* =========================================================================
+   New additions: kick button, role chip, purchases, status chips
+   ========================================================================= */
+
+.role-chip {
+  font-size: 0.62rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.role-chip.admin { background: #ede9fe; color: #7c3aed; }
+
+.kick-btn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.kick-btn i { width: 16px; height: 16px; }
+.kick-btn:hover { background: #fee2e2; color: #dc2626; }
+
+body.dark-mode .kick-btn { color: #64748b; }
+body.dark-mode .kick-btn:hover { background: #451a1a; color: #fca5a5; }
+
+/* --- Purchases --- */
+.purchase-list { display: flex; flex-direction: column; gap: 12px; margin-top: 15px; }
+
+.purchase-item {
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 14px;
+  padding: 14px 16px;
+  background: var(--white, #fff);
+}
+.purchase-head {
+  display: flex; justify-content: space-between; align-items: center; gap: 10px;
+  margin-bottom: 6px;
+}
+.purchase-name { font-weight: 700; font-size: 0.95rem; margin-right: 8px; }
+.purchase-meta { font-size: 0.75rem; color: #94a3b8; }
+.purchase-desc {
+  font-size: 0.85rem; color: var(--text-sub, #64748b);
+  margin: 4px 0 10px;
+}
+.purchase-progress {
+  height: 8px; background: #e2e8f0; border-radius: 10px;
+  overflow: hidden; margin: 8px 0 6px;
+}
+.purchase-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  border-radius: 10px;
+  transition: width .3s ease;
+}
+.purchase-numbers {
+  font-size: 0.85rem; font-weight: 600;
+}
+.purchase-actions {
+  display: flex; gap: 8px; margin-top: 10px;
+}
+.btn-ghost-primary, .btn-ghost-danger {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  font-family: inherit;
+}
+.btn-ghost-primary { background: #eef2ff; color: #4f46e5; border-color: #c7d2fe; }
+.btn-ghost-primary:hover { background: #e0e7ff; }
+.btn-ghost-danger  { background: #fef2f2; color: #dc2626; border-color: #fecaca; }
+.btn-ghost-danger:hover { background: #fee2e2; }
+
+.status-chip {
+  font-size: 0.62rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.status-chip.open      { background: #dbeafe; color: #1d4ed8; }
+.status-chip.funded    { background: #dcfce7; color: #166534; }
+.status-chip.cancelled { background: #f1f5f9; color: #64748b; }
+
+body.dark-mode .purchase-item          { background: var(--white); border-color: var(--border); }
+body.dark-mode .purchase-progress      { background: #334155; }
+body.dark-mode .btn-ghost-primary      { background: #312e81; color: #c7d2fe; border-color: #4338ca; }
+body.dark-mode .btn-ghost-primary:hover{ background: #3730a3; }
+body.dark-mode .btn-ghost-danger       { background: #3f1d1d; color: #fca5a5; border-color: #7f1d1d; }
+body.dark-mode .btn-ghost-danger:hover { background: #4a2222; }
+body.dark-mode .status-chip.open       { background: #1e3a8a; color: #bfdbfe; }
+body.dark-mode .status-chip.funded     { background: #14532d; color: #86efac; }
+body.dark-mode .status-chip.cancelled  { background: #1e293b; color: #94a3b8; }

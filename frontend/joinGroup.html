@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rota | Join a Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="joinGroup.css">
+    <link rel="stylesheet" href="toast.css">
+</head>
+<body>
+    <main class="app-container">
+        <section class="form-side">
+            <div class="brand">
+                <div class="logo-sq">R</div>
+                <span>Rota House Sharing</span>
+            </div>
+            
+            <header>
+                <h1>Join your house</h1>
+                <p>Enter the unique code shared by your roommates to get started.</p>
+            </header>
+
+            <form id="joinForm">
+                <div class="field">
+                    <label>Invite Code</label>
+                    <div class="code-input-container">
+                        <input type="text" class="code-digit" maxlength="1" placeholder="•">
+                        <input type="text" class="code-digit" maxlength="1" placeholder="•">
+                        <input type="text" class="code-digit" maxlength="1" placeholder="•">
+                        <input type="text" class="code-digit" maxlength="1" placeholder="•">
+                        <input type="text" class="code-digit" maxlength="1" placeholder="•">
+                        <input type="text" class="code-digit" maxlength="1" placeholder="•">
+                    </div>
+                    <p class="helper-text">Codes are usually 6 characters long (e.g., HX-921)</p>
+                </div>
+
+                <button type="submit" class="submit-btn" id="joinBtn" disabled>
+                    Find House
+                    <i data-lucide="search"></i>
+                </button>
+            </form>
+
+            <div class="footer-note">
+                Don't have a code? <a href="create.html">Create a new group</a>
+            </div>
+        </section>
+
+        <section class="preview-side">
+            <div id="resultCard" class="preview-card hidden">
+                <div class="card-header">
+                    <div class="house-icon"><i data-lucide="check-circle"></i></div>
+                    <h3 id="houseNameResult">Baker Street 221B</h3>
+                    <p id="houseDescResult" class="preview-desc-text">A quiet household for busy professionals. Weekly cleaning rotations active.</p>
+                </div>
+                <div class="member-list">
+                    <p class="section-label">Current Roommates</p>
+                    <div class="member-stack">
+                        <div class="member-item">
+                            <div class="avatar-sm">JD</div>
+                            <span>John Doe (Host)</span>
+                        </div>
+                        <div class="member-item">
+                            <div class="avatar-sm">AS</div>
+                            <span>Alice Smith</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="confirm-join-btn">Request to Join</button>
+            </div>
+
+            <div id="emptyState" class="empty-preview">
+                <i data-lucide="house"></i>
+                <p>Enter a code to see house details</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="api.js"></script>
+<script src="toast.js"></script>
+<script src="joinGroup.js"></script>
+</body>
+</html>

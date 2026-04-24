@@ -1,0 +1,73 @@
+/* Reusing your root variables and global resets from create.css */
+@import url('createGroup.css'); 
+
+/* Code Input Styling */
+.code-input-container {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.code-digit {
+    width: 50px;
+    height: 60px;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 0;
+    text-transform: uppercase;
+    color: var(--primary);
+    background: white;
+}
+
+.helper-text {
+    font-size: 0.8rem;
+    color: var(--text-sub);
+    margin-top: 12px;
+}
+
+.submit-btn:disabled {
+    background: #cbd5e1;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Discovery Preview Specifics */
+.empty-preview {
+    text-align: center;
+    color: rgba(255,255,255,0.7);
+}
+
+.empty-preview i {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 20px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.confirm-join-btn {
+    width: 100%;
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 700;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.footer-note {
+    margin-top: auto;
+    font-size: 0.9rem;
+    color: var(--text-sub);
+}
+
+.footer-note a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+}

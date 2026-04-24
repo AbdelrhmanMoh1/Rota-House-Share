@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rota | Global Leaderboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="leaderboard.css">
+    <link rel="stylesheet" href="toast.css">
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="brand-small">R</div>
+        <div class="nav-links">
+            <a href="Groupdashboard.html">Dashboard</a>
+            <a href="leaderboard.html" class="active">Leaderboard</a>
+            <!-- FIX (Bug #2): Plain link to profile.html. No interceptor, no
+                 rota_profile_redirect flag, no forced bounce through the
+                 loading screen. The previous interceptor was the literal
+                 mechanism by which leaving a household → opening profile →
+                 any nav click put the user back into the old household. -->
+            <a href="profile.html">Account</a>
+        </div>
+        <button onclick="clearSession()" class="logout-btn">Logout</button>
+    </nav>
+
+    <main class="app-container">
+        <section class="form-side">
+            <header>
+                <h1>House Rankings</h1>
+                <p>Real-time rankings based on completed household chores.</p>
+            </header>
+
+            <div class="filter-tabs">
+                <button class="tab active" data-filter="weekly">Weekly</button>
+                <button class="tab" data-filter="monthly">Monthly</button>
+                <button class="tab" data-filter="alltime">All Time</button>
+            </div>
+
+            <div class="ranking-list" id="rankingList"></div>
+        </section>
+
+        <section class="preview-side">
+            <div class="podium-container">
+                <h2 class="podium-title">Top Performers</h2>
+                <div class="podium-visual">
+                    <div class="podium-pillar second">
+                        <div class="badge-icon silver"><i data-lucide="award"></i></div>
+                        <div class="podium-info">
+                            <span class="house-name" id="name-2">Loading...</span>
+                            <span class="chore-count" id="score-2">0</span>
+                        </div>
+                        <div class="block">2</div>
+                    </div>
+                    <div class="podium-pillar first">
+                        <div class="badge-icon gold"><i data-lucide="crown"></i></div>
+                        <div class="podium-info">
+                            <span class="house-name" id="name-1">Loading...</span>
+                            <span class="chore-count" id="score-1">0</span>
+                        </div>
+                        <div class="block">1</div>
+                    </div>
+                    <div class="podium-pillar third">
+                        <div class="badge-icon bronze"><i data-lucide="medal"></i></div>
+                        <div class="podium-info">
+                            <span class="house-name" id="name-3">Loading...</span>
+                            <span class="chore-count" id="score-3">0</span>
+                        </div>
+                        <div class="block">3</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="api.js"></script>
+    <script src="toast.js"></script>
+    <script src="leaderboard.js"></script>
+</body>
+</html>

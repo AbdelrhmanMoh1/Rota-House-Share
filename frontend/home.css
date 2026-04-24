@@ -1,0 +1,401 @@
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #f0f3ff;
+            --success: #10b981;
+            --success-light: #ecfdf5;
+            --bg: #f8fafc;
+            --white: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+            --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
+            --radius-xl: 24px;
+            --danger: #ff5c5c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- HEADER --- */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: 64px;
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-box {
+            background: var(--primary);
+            color: var(--white);
+            padding: 6px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .app-name {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .app-name span {
+            color: var(--primary);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            color: #64748b;
+            padding: 8px;
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .notif-dot {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 7px;
+            height: 7px;
+            background: #ef4444;
+            border-radius: 50%;
+            border: 2px solid var(--white);
+        }
+
+        /* --- USER MENU --- */
+        .user-menu {
+            position: relative;
+            padding: 10px 0;
+        }
+
+        .avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 170px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            padding: 6px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1100;
+        }
+
+        .user-menu:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            width: 100%;
+            padding: 10px 12px;
+            border: none;
+            background: none;
+            text-align: left;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            border-radius: 10px;
+            color: #1e293b;
+            transition: background 0.15s;
+        }
+
+        .dropdown-item:hover {
+            background: #f8fafc;
+        }
+
+        .dropdown-item.danger {
+            color: var(--danger);
+        }
+
+        .dropdown-item.danger:hover {
+            background: #fff5f5;
+        }
+
+        .dropdown-item i {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* --- MAIN CONTENT --- */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            z-index: 1;
+        }
+
+        /* Hover Interaction Effects */
+        .card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card.primary:hover {
+            border-color: var(--primary);
+        }
+
+        .card.success:hover {
+            border-color: var(--success);
+        }
+
+        .card-icon-wrap {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .card-icon-wrap {
+            transform: scale(1.1);
+        }
+
+        .card.primary .card-icon-wrap { background: #eff2ff; color: #4f46e5; }
+        .card.success .card-icon-wrap { background: #ecfdf5; color: #10b981; }
+
+        .card h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: #0f172a;
+        }
+
+        .card p {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            max-width: 90%;
+        }
+
+        .card-link {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 1rem;
+            transition: gap 0.2s ease;
+        }
+
+        .card:hover .card-link {
+            gap: 10px;
+        }
+
+        .card.primary .card-link { color: #4f46e5; }
+        .card.success .card-link { color: #10b981; }
+
+        /* Faint Watermark Icons - Animated on Hover */
+        .watermark {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            color: #f1f5f9;
+            width: 150px;
+            height: 150px;
+            pointer-events: none;
+            z-index: 0;
+            transition: transform 0.5s ease, color 0.3s ease;
+        }
+
+        .card:hover .watermark {
+            transform: translate(-10px, 10px) scale(1.15) rotate(-5deg);
+            color: #f0f3ff;
+        }
+
+        .card.success:hover .watermark {
+            color: #f0fdf4;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- INFO BANNER --- */
+        .info-banner {
+            margin-top: 4rem;
+            background: #1e1b4b;
+            color: var(--white);
+            padding: 3rem 4rem;
+            border-radius: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .info-banner:hover {
+            transform: scale(1.01);
+        }
+
+        .info-text-wrap {
+            max-width: 500px;
+        }
+
+        .info-banner h4 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .info-banner p {
+            color: #cbd5e1;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .info-btn {
+            background: var(--white);
+            color: #1e1b4b;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .info-btn:hover {
+            background: #f1f5f9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255,255,255,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .header { padding: 0 1rem; }
+            .info-banner { flex-direction: column; text-align: center; padding: 2.5rem; }
+            .hero h2 { font-size: 2rem; }
+            .card-grid { grid-template-columns: 1fr; }
+        }
+/* =============================================
+   BUG 5 FIX: DARK MODE for home page
+   Previously no dark mode rules existed here.
+   home.js now applies dark-mode class on load.
+   ============================================= */
+body.dark-mode {
+    background-color: #0f172a;
+    color: #f8fafc;
+}
+
+body.dark-mode .card,
+body.dark-mode .group-card,
+body.dark-mode .house-card {
+    background: #1e293b;
+    border-color: #334155;
+}
+
+body.dark-mode nav,
+body.dark-mode .navbar,
+body.dark-mode header {
+    background: #1e293b;
+    border-bottom-color: #334155;
+}
+
+body.dark-mode .dropdown {
+    background: #1e293b;
+    border-color: #334155;
+}
+
+body { transition: background-color 0.3s ease, color 0.3s ease; }

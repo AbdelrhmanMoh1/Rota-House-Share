@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rota | My Account</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="toast.css">
+</head>
+<body>
+    <div class="app-wrapper">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="brand">
+                <div class="logo-sq">R</div>
+            </div>
+            <div class="nav-links">
+                <!-- FIX (Bug #2): Household icon goes through requireMembership on Dashboard load, so if you've left, it bounces to home.html with a toast. -->
+                <a href="Groupdashboard.html" class="nav-item" title="Dashboard"><i data-lucide="layout-dashboard"></i></a>
+                <a href="leaderboard.html" class="nav-item" title="Leaderboard"><i data-lucide="trophy"></i></a>
+                <a href="profile.html" class="nav-item active" title="Account"><i data-lucide="user"></i></a>
+            </div>
+            <button class="logout-btn" title="Logout"><i data-lucide="log-out"></i></button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="content">
+            <header class="profile-header">
+                <div class="profile-info">
+                    <div class="avatar-large" id="profileAvatar">?</div>
+                    <div class="name-meta">
+                        <h1>Loading...</h1>
+                        <p>Loading your profile...</p>
+                    </div>
+                </div>
+                <!-- FIX (Bug #6): Button now opens the Edit Profile modal defined at the bottom of this file rather than navigating to a separate page. -->
+                <button class="edit-profile-btn" id="editProfileBtn">Edit Profile</button>
+            </header>
+
+            <div class="dashboard-grid">
+                <!-- Stats Section -->
+                <section class="card stats-card">
+                    <h3>My Stats</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-val">—</span>
+                            <span class="stat-label">Chores Done</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-val">—</span>
+                            <span class="stat-label">House Rank</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-val">—</span>
+                            <span class="stat-label">Reliability</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Current House Section -->
+                <section class="card group-card">
+                    <h3>Current House</h3>
+                    <div class="house-box" id="houseBox">
+                        <div class="house-icon-bg"><i data-lucide="home"></i></div>
+                        <div class="house-details">
+                            <h4>Loading...</h4>
+                            <p>Loading members...</p>
+                        </div>
+                        <span class="role-badge">Member</span>
+                    </div>
+                </section>
+
+                <!-- Badges Section -->
+                <!-- FIX (Bug #4): The grid is now empty in HTML; profile.js renders real achievements or an empty-state message. -->
+                <section class="card badges-card">
+                    <div class="card-header-flex">
+                        <h3>Achievements</h3>
+                        <a href="leaderboard.html" class="view-all">Leaderboard</a>
+                    </div>
+                    <div class="badges-grid" id="badgesGrid"></div>
+                </section>
+
+                <!-- Settings/Preferences Section -->
+                <section class="card settings-card">
+                    <h3>Preferences</h3>
+                    <div class="setting-row">
+                        <span>Email Notifications</span>
+                        <label class="switch">
+                            <input type="checkbox" id="emailNotifToggle" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-row">
+                        <span>Dark Mode</span>
+                        <label class="switch">
+                            <input type="checkbox" id="darkModeToggle">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- FIX (Bug #6): Edit Profile modal — hidden by default, opened by the Edit Profile button. Submits via PUT /auth/me. -->
+    <div id="editProfileModal" class="modal" hidden>
+        <div class="modal-backdrop" data-close></div>
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="epTitle">
+            <h3 id="epTitle">Edit Profile</h3>
+
+            <label class="ep-label">
+                <span>Name</span>
+                <input id="ep-name" type="text" maxlength="100" autocomplete="name" required>
+            </label>
+
+            <label class="ep-label">
+                <span>Email</span>
+                <input id="ep-email" type="email" maxlength="255" autocomplete="email" required>
+            </label>
+
+            <fieldset class="avatar-picker">
+                <legend>Avatar</legend>
+                <div class="avatar-options" id="ep-avatar-options">
+                    <button type="button" class="avatar-opt" data-val="🦊" aria-label="Fox avatar">🦊</button>
+                    <button type="button" class="avatar-opt" data-val="🐼" aria-label="Panda avatar">🐼</button>
+                    <button type="button" class="avatar-opt" data-val="🐸" aria-label="Frog avatar">🐸</button>
+                    <button type="button" class="avatar-opt" data-val="🦄" aria-label="Unicorn avatar">🦄</button>
+                    <button type="button" class="avatar-opt" data-val="🐙" aria-label="Octopus avatar">🐙</button>
+                    <button type="button" class="avatar-opt" data-val="🐧" aria-label="Penguin avatar">🐧</button>
+                </div>
+                <label class="upload-row">
+                    <span>Or upload your own:</span>
+                    <input id="ep-upload" type="file" accept="image/png,image/jpeg,image/webp">
+                </label>
+                <div class="ep-avatar-preview" id="ep-avatar-preview" aria-hidden="true"></div>
+            </fieldset>
+
+            <div class="modal-actions">
+                <button type="button" class="btn-secondary" data-close>Cancel</button>
+                <button type="button" class="btn-primary" id="ep-save">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts: toast first so it's ready, then profile. api.js must come before both. -->
+    <script src="api.js"></script>
+    <script src="toast.js"></script>
+    <script src="profile.js"></script>
+</body>
+</html>

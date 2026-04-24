@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rota | Initializing...</title>
+    <link rel="stylesheet" href="loading.css">
+    <link rel="stylesheet" href="toast.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div class="loading-container" id="app">
+        <div class="logo-wrapper">
+            <div class="logo-sq">R</div>
+            <div class="logo-pulse"></div>
+        </div>
+
+        <h1>Rota House Sharing</h1>
+        <p class="status-message" id="statusText">Starting application...</p>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <div class="loading-meta">
+            <i data-lucide="loader-2" class="spinner-icon" style="width: 14px;"></i>
+            <span id="percentText">0%</span>
+        </div>
+    </div>
+
+<script src="api.js"></script>
+<script src="toast.js"></script>
+<script src="loading.js"></script>
+</body>
+</html>

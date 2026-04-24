@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rota | Create Your Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="createGroup.css">
+    <link rel="stylesheet" href="toast.css">
+</head>
+<body>
+    <main class="app-container">
+        <section class="form-side">
+            <div class="brand">
+                <div class="logo-sq">R</div>
+                <span>Rota House Sharing</span>
+            </div>
+            
+            <header>
+                <h1>Create your house</h1>
+                <p>Organize chores, split bills, and live better together.</p>
+            </header>
+
+            <form id="groupForm">
+                <div class="field">
+                    <label>House Name</label>
+                    <input type="text" id="houseNameInput" placeholder="e.g. The Penthouse" maxlength="25">
+                </div>
+
+                <div class="field">
+                    <label>Description <span class="optional-text">(Optional)</span></label>
+                    <textarea id="descInput" placeholder="Set some house rules or a warm welcome..." maxlength="120"></textarea>
+                    <div class="char-count"><span id="currentChars">0</span>/120</div>
+                </div>
+
+                <div class="field">
+                    <label>Invite Roommates</label>
+                    <div class="email-input-group">
+                        <input type="email" id="emailInput" placeholder="Enter email address...">
+                        <button type="button" id="addBtn">Add</button>
+                    </div>
+                    <div id="tagContainer" class="tag-container"></div>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    Confirm & Launch Group
+                    <i data-lucide="sparkles"></i>
+                </button>
+            </form>
+        </section>
+
+        <section class="preview-side">
+            <div class="preview-card">
+                <div class="card-header">
+                    <div class="house-icon"><i data-lucide="home"></i></div>
+                    <h3 id="previewName">Your House Name</h3>
+                    <p id="previewDesc" class="preview-desc-text">No description provided yet.</p>
+                </div>
+                <div class="member-list">
+                    <p class="section-label">Proposed Members</p>
+                    <div id="previewMembers" class="member-stack">
+                        <div class="empty-state">No roommates added yet</div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="status-badge">Setup in progress</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="api.js"></script>
+<script src="toast.js"></script>
+<script src="createGroup.js"></script>
+</body>
+</html>

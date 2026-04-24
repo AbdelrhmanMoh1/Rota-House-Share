@@ -1,0 +1,69 @@
+/* =========================================================================
+   Toast notification system
+   Used app-wide for: membership guards, leave success, profile saved,
+   errors, info messages, and cross-page flash messages via sessionStorage.
+   ========================================================================= */
+
+:root {
+  --toast-bg:       #0f172a;
+  --toast-fg:       #f8fafc;
+  --toast-success:  #16a34a;
+  --toast-error:    #dc2626;
+  --toast-info:     #2563eb;
+  --toast-warning:  #d97706;
+}
+
+/* Dark mode inverts the chip so it still pops */
+body.dark-mode {
+  --toast-bg:       #f8fafc;
+  --toast-fg:       #0f172a;
+}
+
+.toast-stack {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 9999;
+  pointer-events: none;
+  max-width: calc(100vw - 40px);
+}
+
+.toast {
+  pointer-events: auto;
+  background: var(--toast-bg);
+  color: var(--toast-fg);
+  padding: 12px 16px;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .18);
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  font-size: .9rem;
+  line-height: 1.35;
+  min-width: 220px;
+  max-width: 360px;
+  border-left: 4px solid var(--toast-info);
+  animation: toast-in .25s ease-out;
+  word-wrap: break-word;
+}
+
+.toast.success { border-left-color: var(--toast-success); }
+.toast.error   { border-left-color: var(--toast-error);   }
+.toast.warning { border-left-color: var(--toast-warning); }
+.toast.info    { border-left-color: var(--toast-info);    }
+
+.toast.out { animation: toast-out .25s ease-in forwards; }
+
+@keyframes toast-in {
+  from { transform: translateX(20px); opacity: 0; }
+  to   { transform: none;             opacity: 1; }
+}
+@keyframes toast-out {
+  to { transform: translateX(20px); opacity: 0; }
+}
+
+@media (max-width: 480px) {
+  .toast-stack { top: 12px; right: 12px; left: 12px; }
+  .toast       { min-width: 0; width: 100%; }
+}

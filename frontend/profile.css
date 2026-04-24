@@ -1,0 +1,342 @@
+/* =========================================================================
+   Profile page styles
+   ========================================================================= */
+
+:root {
+    --primary:       #6366f1;
+    --primary-light: #e0e7ff;
+    --bg-body:       #f8fafc;
+    --white:         #ffffff;
+    --text-main:     #0f172a;
+    --text-sub:      #64748b;
+    --border:        #e2e8f0;
+
+    /* FIX (Bug #3): Added two new tokens so every surface has a named
+       colour instead of scattered literals:
+         --surface-inset  -> inset panels like .house-box, .badge-circle
+         --icon           -> stroke colour for all lucide icons       */
+    --surface-inset: #f1f5f9;
+    --icon:          #475569;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--bg-body);
+    color: var(--text-main);
+}
+
+.app-wrapper { display: flex; min-height: 100vh; }
+
+/* Sidebar */
+.sidebar {
+    width: 80px;
+    background: var(--white);
+    border-right: 1px solid var(--border);
+    display: flex; flex-direction: column; align-items: center;
+    padding: 30px 0;
+    position: fixed; height: 100vh;
+}
+.brand .logo-sq {
+    background: var(--primary);
+    color: white;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-weight: 800;
+    margin-bottom: 50px;
+}
+.nav-links { display: flex; flex-direction: column; gap: 25px; flex: 1; }
+.nav-item  { color: var(--icon); transition: all 0.2s; }
+.nav-item.active, .nav-item:hover { color: var(--primary); }
+.logout-btn { border: none; background: none; color: #ef4444; cursor: pointer; }
+
+/* Content */
+.content {
+    margin-left: 80px;
+    flex: 1;
+    padding: 60px;
+    max-width: 1100px;
+}
+
+.profile-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 50px;
+}
+.profile-info { display: flex; align-items: center; gap: 25px; }
+
+.avatar-large {
+    width: 80px; height: 80px;
+    background: var(--primary-light);
+    color: var(--primary);
+    border-radius: 24px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem; font-weight: 700;
+    overflow: hidden;
+    background-size: cover; background-position: center;
+}
+.name-meta h1 { font-size: 2rem; letter-spacing: -1px; }
+.name-meta p  { color: var(--text-sub); margin-top: 4px; }
+
+.edit-profile-btn {
+    padding: 12px 24px;
+    background: var(--white);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-family: inherit;
+}
+.edit-profile-btn:hover { background: #f1f5f9; }
+
+/* Dashboard grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+.card {
+    background: var(--white);
+    padding: 30px;
+    border-radius: 24px;
+    border: 1px solid var(--border);
+}
+.card h3 { font-size: 1.1rem; margin-bottom: 25px; font-weight: 700; }
+
+/* Stats */
+.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+.stat-item  { text-align: center; }
+.stat-val   { display: block; font-size: 1.8rem; font-weight: 800; color: var(--primary); }
+.stat-label { font-size: 0.8rem; color: var(--text-sub); font-weight: 600; }
+
+/* Group card */
+.house-box {
+    display: flex; align-items: center; gap: 15px;
+    padding: 20px;
+    background: var(--surface-inset);
+    border-radius: 16px;
+}
+.house-box.empty {
+    justify-content: center;
+    padding: 30px;
+    border: 2px dashed var(--border);
+    background: transparent;
+}
+.house-icon-bg {
+    background: var(--white);
+    color: var(--primary);
+    width: 45px; height: 45px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+}
+.house-details h4 { font-size: 1rem; }
+.house-details p  { font-size: 0.85rem; color: var(--text-sub); }
+.role-badge {
+    margin-left: auto;
+    background: #dcfce7; color: #166534;
+    padding: 4px 10px; border-radius: 20px;
+    font-size: 0.75rem; font-weight: 700;
+}
+
+/* Badges */
+.card-header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.card-header-flex h3 { margin-bottom: 0; }
+.view-all { color: var(--primary); font-size: 0.85rem; text-decoration: none; font-weight: 600; }
+
+.badges-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+.badge-item  { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+.badge-circle {
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--surface-inset);
+    color: var(--text-sub);
+}
+
+/* FIX (Bug #3): White icon stroke on a solid accent background always
+   reads in both themes, unlike the previous indigo-on-deep-indigo which
+   had ~2.4:1 contrast and vanished in dark mode. */
+.earned .badge-circle { background: var(--primary-light); color: var(--primary); }
+
+.badge-item span { font-size: 0.7rem; font-weight: 700; color: var(--text-sub); }
+
+/* FIX (Bug #4): Empty-state for the Achievements card. */
+.empty-state {
+    grid-column: 1 / -1;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 10px;
+    padding: 20px 10px;
+    color: var(--text-sub);
+    text-align: center;
+}
+.empty-state i { width: 28px; height: 28px; color: var(--primary); }
+.empty-state p { font-size: 0.85rem; line-height: 1.4; }
+
+/* Settings */
+.setting-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--surface-inset);
+}
+.switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+    position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #cbd5e1; transition: .4s; border-radius: 34px;
+}
+.slider:before {
+    position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px;
+    background-color: white; transition: .4s; border-radius: 50%;
+}
+input:checked + .slider { background-color: var(--primary); }
+input:checked + .slider:before { transform: translateX(20px); }
+
+
+/* =========================================================================
+   DARK MODE
+   FIX (Bug #3): Fully variable-driven. No raw hex inside .dark-mode blocks
+   except where a single special case needs it. Icons inherit currentColor
+   via their parent's `color` (which points at --icon), so flipping the
+   variable re-colours everything automatically.
+   ========================================================================= */
+
+body.dark-mode {
+    --bg-body:       #0f172a;
+    --white:         #1e293b;
+    --text-main:     #f8fafc;
+    --text-sub:      #cbd5e1;   /* was #94a3b8 — bumped for AA contrast on cards */
+    --border:        #334155;
+    --primary-light: #4338ca;   /* was #312e81 — lighter so icons on top stay visible */
+    --surface-inset: #0b1120;   /* darker than card, for real inset depth */
+    --icon:          #cbd5e1;
+}
+
+body.dark-mode .card {
+    background-color: var(--white);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, .4);
+}
+body.dark-mode .sidebar { background: var(--white); border-right-color: var(--border); }
+
+body.dark-mode .earned .badge-circle { color: #ffffff; }
+
+body.dark-mode .role-badge {
+    background: #134e2a;
+    color: #86efac;
+}
+
+/* Badge locked state:
+   In light mode, 0.3 opacity reads as "faded". In dark mode, that same
+   opacity on a dark surface makes the icon invisible — lift it and drop
+   the greyscale filter which is a light-theme-only trick. */
+.badge-item.locked { opacity: 0.55; filter: grayscale(1); cursor: not-allowed; }
+body.dark-mode .badge-item.locked { opacity: 0.7; filter: none; }
+body.dark-mode .badge-item.locked .badge-circle {
+    background: var(--surface-inset);
+    color: var(--text-sub);
+}
+
+/* Join/Create blank-state link */
+.group-card .edit-profile-btn {
+    margin-top: 10px;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+}
+
+/* Theme-swap transitions */
+body                       { transition: background-color .3s ease, color .3s ease; }
+.card, .sidebar, .slider   { transition: background-color .3s ease, border-color .3s ease; }
+
+
+/* =========================================================================
+   Edit Profile Modal
+   FIX (Bug #6): New styles for the in-page modal.
+   ========================================================================= */
+
+.modal[hidden] { display: none; }
+.modal {
+    position: fixed; inset: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: center;
+}
+.modal-backdrop { position: absolute; inset: 0; background: rgba(15, 23, 42, .55); }
+.modal-card {
+    position: relative;
+    background: var(--white);
+    color: var(--text-main);
+    padding: 28px;
+    border-radius: 18px;
+    width: min(460px, 92vw);
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .3);
+    display: flex; flex-direction: column; gap: 14px;
+    border: 1px solid var(--border);
+}
+.modal-card h3 { font-size: 1.15rem; }
+
+.ep-label { display: flex; flex-direction: column; gap: 6px; font-size: .85rem; font-weight: 600; color: var(--text-sub); }
+.ep-label input {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--bg-body);
+    color: var(--text-main);
+    font-family: inherit;
+    font-size: .95rem;
+}
+.ep-label input:focus { outline: 2px solid var(--primary); outline-offset: 1px; }
+
+.avatar-picker {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px;
+    display: flex; flex-direction: column; gap: 10px;
+}
+.avatar-picker legend { padding: 0 6px; font-size: .8rem; font-weight: 700; color: var(--text-sub); }
+.avatar-options { display: flex; gap: 8px; flex-wrap: wrap; }
+.avatar-opt {
+    font-size: 1.4rem;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    background: var(--surface-inset);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform .15s ease, border-color .15s ease;
+}
+.avatar-opt:hover { transform: scale(1.05); }
+.avatar-opt.selected { border-color: var(--primary); }
+.upload-row { display: flex; flex-direction: column; gap: 6px; font-size: .8rem; color: var(--text-sub); }
+.upload-row input[type="file"] { font-size: .8rem; color: var(--text-main); }
+.ep-avatar-preview {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: var(--surface-inset);
+    align-self: flex-end;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem;
+    background-size: cover; background-position: center;
+}
+
+.modal-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 6px; }
+.btn-primary, .btn-secondary {
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: .9rem;
+    border: 1px solid var(--border);
+}
+.btn-secondary { background: var(--white); color: var(--text-main); }
+.btn-secondary:hover { background: var(--surface-inset); }
+.btn-primary { background: var(--primary); color: white; border-color: var(--primary); }
+.btn-primary:hover { filter: brightness(1.05); }
+.btn-primary:disabled { opacity: .6; cursor: progress; }
+
+
+@media (max-width: 850px) {
+    .dashboard-grid { grid-template-columns: 1fr; }
+}
